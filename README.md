@@ -12,27 +12,26 @@ algoritmos_tarea2.py     # los 3 algoritmos de Tarea 2 (ejercicio3, 4 y 5)
 generar_etiquetas.py     # Parte 1: corre los algoritmos sobre las 500 instancias y etiqueta
 entrenar_evaluar.py      # Parte 2: Árbol / KNN, accuracy, matriz de confusión, regret, importancias
 run_all.sh               # reproduce todo
-data/
-  instances.zip                      # coordenadas (x, y) provistas; hay que descomprimirlo (ver abajo)
-  train.csv, test.csv                # características provistas (sin costos ni etiqueta)
-  {train,test}_labeled_literal.csv   # con costos y best_algorithm (parámetros de Tarea 2)
-  {train,test}_labeled_t0_10.csv     # sensibilidad: SA con T0 = 10
+requirements.txt         # dependencias
+data.zip                 # carpeta data/ comprimida (ver "Cómo correrlo"); al descomprimir contiene:
+                         #   data/instances/inst_NNNN.csv         coordenadas (x, y) provistas
+                         #   data/train.csv, data/test.csv        características provistas (sin costos ni etiqueta)
+                         #   data/{train,test}_labeled_literal.csv  con costos y best_algorithm (parámetros de Tarea 2)
+                         #   data/{train,test}_labeled_t0_10.csv    sensibilidad: SA con T0 = 10
 results/                 # métricas, matrices de confusión, importancias, árbol
 reporte/                 # reporte en Word
 ```
 
 ## Cómo correrlo
 
-**1. Descomprimir las instancias** (crea `data/instances/`). Dentro de la carpeta `data/`:
+**1. Descomprimir los datos.** En la raíz del repo, junto a los scripts:
 
 ```bash
-cd data
-unzip instances.zip      # en Windows: clic derecho > Extraer aquí
-cd ..
+unzip data.zip           # en Windows: clic derecho > Extraer aquí
 ```
 
-Debe quedar `data/instances/inst_0001.csv` ... `inst_0500.csv`. Si el zip crea una carpeta
-extra (por ejemplo `data/instances/instances/`), mueve los archivos un nivel arriba.
+Debe quedar una carpeta `data/` con `instances/inst_0001.csv` ... `inst_0500.csv`, `train.csv` y `test.csv`.
+Si aparece `data/data/`, mueve el contenido un nivel arriba: los scripts leen de `data/` en la raíz del repo.
 
 **2. Instalar dependencias y correr:**
 
