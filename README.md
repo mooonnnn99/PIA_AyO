@@ -1,6 +1,6 @@
 # Proyecto Final – Hiper-heurística de selección para TSP
 
-Dado una instancia de TSP, un clasificador predice cuál de tres algoritmos (los de la Tarea 2)
+Dada una instancia de TSP, un clasificador predice cuál de tres algoritmos (los de la Tarea 2)
 obtendrá el mejor tour: **2-opt hill climbing**, **Recocido Simulado + 2-opt** o **MST + 2-opt**.
 
 Reporte completo: [`reporte/Reporte_Proyecto_Final.docx`](reporte/Reporte_Proyecto_Final.docx)
@@ -13,8 +13,8 @@ generar_etiquetas.py     # Parte 1: corre los algoritmos sobre las 500 instancia
 entrenar_evaluar.py      # Parte 2: Árbol / KNN, accuracy, matriz de confusión, regret, importancias
 run_all.sh               # reproduce todo
 data/
-  instances/inst_NNNN.csv        # coordenadas (x, y) provistas
-  train.csv, test.csv            # características provistas (sin costos ni etiqueta)
+  instances.zip                      # coordenadas (x, y) provistas; hay que descomprimirlo (ver abajo)
+  train.csv, test.csv                # características provistas (sin costos ni etiqueta)
   {train,test}_labeled_literal.csv   # con costos y best_algorithm (parámetros de Tarea 2)
   {train,test}_labeled_t0_10.csv     # sensibilidad: SA con T0 = 10
 results/                 # métricas, matrices de confusión, importancias, árbol
@@ -23,14 +23,37 @@ reporte/                 # reporte en Word
 
 ## Cómo correrlo
 
+**1. Descomprimir las instancias** (crea `data/instances/`). Dentro de la carpeta `data/`:
+
 ```bash
-pip install -r requirements.txt
-./run_all.sh          # o ejecutar los dos scripts por separado (ver run_all.sh)
+cd data
+unzip instances.zip      # en Windows: clic derecho > Extraer aquí
+cd ..
 ```
 
+Debe quedar `data/instances/inst_0001.csv` ... `inst_0500.csv`. Si el zip crea una carpeta
+extra (por ejemplo `data/instances/instances/`), mueve los archivos un nivel arriba.
+
+**2. Instalar dependencias y correr:**
+
+```bash
+pip install -r requirements.txt
+bash run_all.sh
+```
+
+En Windows, si `python3` no existe, reemplázalo por `python` en `run_all.sh`, o ejecuta a mano:
+
+```bash
+python generar_etiquetas.py --t0 1000 --tag literal
+python generar_etiquetas.py --t0 10 --tag t0_10
+python entrenar_evaluar.py literal
+```
+
+Probado con Python 3.12, scikit-learn 1.9.1, pandas 3.0.6, numpy 2.5.4 y matplotlib 3.11.2.
 Todo es determinista (semilla = número de instancia en los algoritmos, `random_state=42` en los modelos),
-así que se reproducen exactamente las etiquetas y métricas del reporte. Las 500 instancias
-tardan menos de un minuto en un solo núcleo.
+así que se reproducen las etiquetas y métricas del reporte con estas versiones; en otras
+versiones podrían cambiar algunos decimales de los modelos. Las 500 instancias tardan
+menos de un minuto en un solo núcleo.
 
 ## Parámetros del etiquetado
 
