@@ -1,0 +1,109 @@
+Balance 500 inst.:
+                       n     %
+best_algorithm               
+2opt_hill_climbing  294  58.8
+mst_2opt            129  25.8
+sa_2opt              77  15.4
+Clase mayoritaria: 2opt_hill_climbing
+
+TEST (149 inst.)
+                               modelo  accuracy  balanced_acc  regret_abs_medio  regret_rel_medio_%  regret_cero_%  cv_score                                                                               params
+Baseline: siempre 2opt_hill_climbing     0.523         0.333             0.045               1.564         52.349       NaN                                                                                  NaN
+Baseline: siempre 2opt_hill_climbing     0.523         0.333             0.045               1.564         52.349       NaN                                                                                  NaN
+                               Arbol     0.517         0.458             0.068               1.661         54.362     0.596                                          {'max_depth': None, 'min_samples_leaf': 10}
+                    Arbol balanceado     0.483         0.590             0.112               2.339         57.047     0.571                                              {'max_depth': 2, 'min_samples_leaf': 1}
+                                 KNN     0.530         0.451             0.072               1.781         54.362     0.664 {'kneighborsclassifier__n_neighbors': 5, 'kneighborsclassifier__weights': 'uniform'}
+
+Matriz de confusión Arbol (filas=real, cols=pred; HC, SA, MST)
+ [[53  7 18]
+ [14 10  2]
+ [30  1 14]]
+
+Matriz de confusión Arbol balanceado (filas=real, cols=pred; HC, SA, MST)
+ [[13 15 50]
+ [ 4 18  4]
+ [ 0  4 41]]
+
+Matriz de confusión KNN (filas=real, cols=pred; HC, SA, MST)
+ [[60  3 15]
+ [15 10  1]
+ [34  2  9]]
+
+Importancia (Gini, árbol):
+ mean_nn_dist          0.366
+n                     0.277
+mean_pairwise_dist    0.174
+std_coords            0.098
+mean_centroid_dist    0.085
+dist_uniform          0.000
+dist_clustered        0.000
+dist_border           0.000
+
+Importancia por permutación (test, caída de accuracy):
+ std_coords            0.074
+n                     0.062
+mean_nn_dist          0.016
+mean_pairwise_dist    0.005
+dist_clustered        0.000
+dist_uniform          0.000
+dist_border           0.000
+mean_centroid_dist   -0.003
+
+Ganador por n:
+ best_algorithm  2opt_hill_climbing  mst_2opt  sa_2opt
+n                                                    
+5                               36         0       21
+10                              31         0       26
+15                              26        10       21
+20                              31        17        9
+30                              34        22        0
+40                              36        18        0
+60                              29        25        0
+80                              36        18        0
+100                             35        19        0
+
+Ganador por distribución:
+ best_algorithm  2opt_hill_climbing  mst_2opt  sa_2opt
+distribution                                         
+border                         112        37       17
+clustered                       88        54       25
+uniform                         94        38       35
+
+Ganador por n (solo victorias estrictas, sin empates):
+ best_algorithm  2opt_hill_climbing  mst_2opt  sa_2opt
+n                                                    
+5                                0         0       17
+10                               0         0       19
+15                               8        10       17
+20                              24        17        8
+30                              32        22        0
+40                              31        18        0
+60                              29        25        0
+80                              36        18        0
+100                             35        19        0
+
+Accuracy del árbol por n:
+ n
+5      0.67
+10     0.56
+15     0.50
+20     0.44
+30     0.41
+40     0.53
+60     0.33
+80     0.60
+100    0.60
+
+Accuracy del árbol por distribución:
+ distribution
+border       0.59
+clustered    0.48
+uniform      0.48
+
+Predicciones del árbol: {'2opt_hill_climbing': 97, 'mst_2opt': 34, 'sa_2opt': 18}
+
+Regret medio por clase real (árbol):
+best_algorithm
+2opt_hill_climbing    1.36
+mst_2opt              1.76
+sa_2opt               2.38
